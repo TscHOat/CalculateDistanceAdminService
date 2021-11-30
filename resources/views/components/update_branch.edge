@@ -1,0 +1,34 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="" method="POST" id="edit-form">
+        <div class="modal-body">
+              {{ csrfField() }} 
+              <div class="form-group">
+                  <label for="branch-name" class="col-form-label" >
+                      Branch Name
+                  </label>
+                  <input type="text" class="form-control BranchName" name="BranchName">
+              </div>
+              <div class="form-group">
+                  <label for="branch-name" class="col-form-label">
+                      Latidude & Longitude
+                  </label>
+                  <input type="text" class="form-control LatitudeLongitude" name="LatitudeLongitude">
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+          </form>
+    </div>
+  </div>

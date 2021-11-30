@@ -1,0 +1,14 @@
+<tr>
+    <th scope="row">{{branch.BranchCode}}</th>
+    <td>{{branch.BranchName}}</td>
+    <td>{{branch.LatitudeLongitude}}</td>
+    <td>
+    {{--  <a href="{{}}" class="btn btn-primary">Edit</a>  --}}
+    <form action="{{'/branch/'+branch.BranchCode+'?_method=DELETE'}}" method="POST" class="form-inline">
+        <button type="button" class="btn btn-primary col" data-toggle="modal" data-target="#exampleModal" data-code = "{{branch.BranchCode}}" data-name = "{{branch.BranchName}}" data-cordinate = "{{branch.LatitudeLongitude}}">Edit</button>
+        {{ csrfField() }}
+        {{--  <a href="" class="btn btn-danger">Delete</a>  --}}
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    </td>
+</tr>

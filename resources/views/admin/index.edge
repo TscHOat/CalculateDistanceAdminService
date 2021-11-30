@@ -1,0 +1,119 @@
+
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+</head>
+
+<body id="page-top">
+    <!-- As a link -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Admin</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/login/logout" class="nav-link">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container h-100 ">
+        <div class="row  ">
+            <div class="col">
+                <br>
+                <h3>
+                    Branch
+                </h3>
+                @if(!Branches.isEmpty)
+                  @!component('components/pagination',{pagination: Branches,presenter : 'PaginationPresenter'})
+                @endif
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">Code</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Latitude , Longitude</th>
+                            <th scope="col">Controller</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @include('components/insert_branch')
+                        @each(branch in Branches.toJSON().data )
+                          @include('partial/branch')
+                        @endeach
+                        @if(Branches.isEmpty)
+                        <tr>
+                            <th scope="row">Null</th>
+                            <td>No Data</td>
+                            <td>No Data</td>
+                            <td>
+                            Null
+                            </td>
+                        </tr>
+                        @endif
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row text-center">
+            <div class="col alert-danger">
+                <h3>
+                    Google Map API
+                </h3>
+                <form action="{{'/googleapikey/'+GoogleAPIKey.Id+'?_method=PUT'}}" method="post">
+                    {{ csrfField() }}
+                    <input class="form-control" type="text" name="key" style="margin-top:5%" value="{{GoogleAPIKey.api_key}}">
+                    <button type="submit" class="btn btn-primary w-25 " style="margin-top:5%">Edit</button>
+                </form>
+            </div>
+            <div class="col alert-success">
+                <h3>
+                    API Key
+                </h3>
+                <form action="{{'/apikey/'+APIKey.Id+'?_method=PUT'}}" method="post">
+                    {{ csrfField() }}
+                    <input class="form-control" type="text" name="key" style="margin-top:5%" value="{{APIKey.api_key}}">
+                    <button type="submit" class="btn btn-primary w-25 " style="margin-top:5%">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright © TscHOat 2020</small></div>
+    </div>
+    @include('components/update_branch')
+    <!--@!component('components/update_branch')-->
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+
+
+<script>
+    $(document).ready(()=>{
+        $('#exampleModal').on('shown.bs.modal', (event) =>{
+            var btn = $(event.relatedTarget)
+            var code = btn.data('code')
+            var name = btn.data('name')
+            var cordinate = btn.data('cordinate')
+
+            var modal = $(this)
+            $('#edit-form').attr('action','/branch/'+code+'?_method=PUT')
+            $('.BranchName').attr('value', name)
+            $('.LatitudeLongitude').attr('value',cordinate)
+        })
+
+    })
+</script>
+</html>

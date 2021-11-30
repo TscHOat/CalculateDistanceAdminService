@@ -1,0 +1,16 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {{ isFirst(pagination) ? 'disabled':''}}">
+            <a class="page-link" href="{{ isFirst(pagination) ? '#' : '?page=' + (pagination.page - 1) }}">Previous</a>
+        </li>
+        @each(page in range(1,pagination.lastPage))
+        <li class="page-item {{ isCurrent(pagination, page) ? 'active' : ''}}">
+        <a class="page-link " {{ isCurrent(pagination, page) ? '' : 'href=?page' + page }}>{{ page }}</a>
+        </li>
+        @endeach
+        <li class="page-item {{pagination.lastPage == pagination.page ? 'disabled':''}}">
+            <a class="page-link" href="{{  isLast(pagination) ? '#' : '?page=' + (pagination.page + 1) }}">Next</a>
+        </li>
+        
+    </ul>
+</nav>
